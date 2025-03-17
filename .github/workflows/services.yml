@@ -1,0 +1,23 @@
+name: Services
+on:
+  push:
+    branches: [ main ]
+jobs:
+  my-services:
+    runs-on: ubuntu-latest
+    services:
+      nginx:
+        image: nginx
+        # Map port 8080 on the Docker host to port 80 on the nginx container
+        ports:
+        - 8080:80
+    redis:
+      image: redis
+      # Map random free TCP port on Docker host to port 6379 on redis container
+      ports:
+      - 6379/tcp
+    steps:
+    - run: |
+        echo "Redis available on 127.0.0.1:${{ job.services.redis.ports['6379'] }}"
+        echo "Nginx available on 127.0.0.1:${{ job.services.nginx.ports['80'] }}"
+    
