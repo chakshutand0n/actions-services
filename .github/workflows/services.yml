@@ -11,11 +11,11 @@ jobs:
         # Map port 8080 on the Docker host to port 80 on the nginx container
         ports:
         - 8080:80
-    redis:
-      image: redis
-      # Map random free TCP port on Docker host to port 6379 on redis container
-      ports:
-      - 6379/tcp
+      redis:
+        image: redis
+        # Map random free TCP port on Docker host to port 6379 on redis container
+        ports:
+        - 6379/tcp
     steps:
     - run: |
         echo "Redis available on 127.0.0.1:${{ job.services.redis.ports['6379'] }}"
